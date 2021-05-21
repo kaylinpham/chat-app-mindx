@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const cors = require("cors");
-const io = require("socket.io");
+const socket = require("socket.io");
 const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 8080;
@@ -42,3 +42,22 @@ app.all("*", (req, res, next) => {
 app.use(errorHandler);
 
 server.listen(PORT, (_) => console.log(`Server running on port ${PORT}`));
+
+// socketio
+const io = socket(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+const chatSocket = require("./socket.io/chatSocket");
+
+io.on("connection", (socket) => {
+  // chat
+  chatSocket(socket);
+
+  // disconnect
+  socket.on("disconnect", () => {
+    "user disconnect";
+  });
+});

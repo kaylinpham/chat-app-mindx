@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 8080;
 const initRoute = require("./routes/index");
+const errorHandler = require("./middlewares/errorHandler");
 
 // connect database
 mongoose
@@ -30,5 +31,14 @@ app.use(express.json());
 
 // route
 initRoute(app);
+
+// error handler
+app.all("*", (req, res, next) => {
+  const err = new Error("The route can not found");
+  err.statusCode = 404;
+  next(err);
+});
+
+app.use(errorHandler);
 
 server.listen(PORT, (_) => console.log(`Server running on port ${PORT}`));

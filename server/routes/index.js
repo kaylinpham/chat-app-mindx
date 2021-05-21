@@ -13,7 +13,7 @@ function initRoute(app) {
 
   // message
   app.get(
-    `${ROOT_URL}/message/:id`,
+    `${ROOT_URL}/message/:id_conversation`,
     messageController().getAllMessageByConversationId
   );
   app.post(
@@ -29,6 +29,7 @@ function initRoute(app) {
   );
   app.post(
     `${ROOT_URL}/conversation`,
+    verifyToken,
     conversationController().createConversation
   );
 }

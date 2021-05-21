@@ -4,6 +4,7 @@ function verifyToken(req, res, next) {
   const Authorization = req.header("authorization");
   if (!Authorization) {
     // handle error
+    res.send("loi token");
   }
 
   const token = Authorization.replace("Bearer ", "");

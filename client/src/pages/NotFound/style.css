@@ -1,0 +1,39 @@
+.not-found {
+  background-color: var(--form-bg-color);
+  height: 100vh;
+  color: rgb(138, 138, 138);
+  font-size: 10rem;
+  font-family: "Courier New", Courier, monospace;
+}
+.not-found__img {
+  width: 300px;
+  position: relative;
+  top: 5rem;
+}
+.not-found p {
+  font-size: 5rem;
+  margin-top: 3rem;
+  font-weight: 600;
+}
+.btn {
+  display: block;
+  background-color: #5765f2;
+  margin: auto;
+  margin-top: 1rem;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+}
+.btn:hover {
+  background-color: #4957f0;
+}
+.not-found__btn {
+  font-family: "Courier New", Courier, monospace;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  font-weight: 700;
+  margin-top: 2rem;
+}

@@ -1,0 +1,44 @@
+.title {
+  height: 48px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgb(31, 28, 28);
+  z-index: 2;
+  display: flex;
+  padding: 8px 1rem;
+  line-height: 48px;
+}
+.title-username__wrapper {
+  width: max-content;
+  padding-right: 1rem;
+  margin-top: -8px;
+  text-align: start;
+  flex-grow: 1;
+}
+.title-img {
+  width: 24px;
+}
+.title-username {
+  height: 32px;
+  vertical-align: super;
+  margin-left: 0.5rem;
+  color: white;
+  font-weight: 600;
+}
+.toolbar {
+  width: 90px;
+  line-height: 32px;
+  display: flex;
+  justify-content: space-around;
+}
+.toolbar-item {
+  height: 100%;
+}
+.toolbar-item__wrapper {
+  cursor: pointer;
+  width: 31px;
+  border-radius: 50%;
+  padding: 1px;
+}
+.toolbar-item__wrapper:hover {
+  background-color: rgb(107, 105, 105);
+}

@@ -1,0 +1,11 @@
+.sidebar {
+  width: 312px;
+  background-color: #2f3136;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+.private-channels {
+  flex-grow: 1;
+}

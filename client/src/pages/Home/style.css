@@ -1,0 +1,5 @@
+.home__container {
+  background-color: violet;
+  display: flex;
+  height: 100vh;
+}

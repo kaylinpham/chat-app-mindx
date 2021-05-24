@@ -5,6 +5,7 @@ const server = require("http").createServer(app);
 const cors = require("cors");
 const socket = require("socket.io");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const PORT = process.env.PORT || 8080;
 const initRoute = require("./routes/index");
@@ -27,6 +28,7 @@ mongoose
 
 // Assets
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 // route

@@ -4,14 +4,19 @@ const Conversation = require("../models/conversation");
 function conversationService() {
   return {
     async get(userId) {
-      const allConversation = await Conversation.find({
-        usersId: mongoose.Types.ObjectId(userId),
-      });
-      return {
-        error: false,
-        message: "get all conversation successfully",
-        data: allConversation,
-      };
+      try {
+        const allConversation = await Conversation.find({
+          usersId: mongoose.Types.ObjectId(userId),
+        });
+        console.log(allConversation);
+        return {
+          error: false,
+          message: "get all conversation successfully",
+          data: allConversation,
+        };
+      } catch (error) {
+        console.log(error);
+      }
     },
     async create({ userId, receiver, lastMsg }) {
       const conversation = new Conversation({

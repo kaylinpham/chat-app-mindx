@@ -1,7 +1,54 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+
+import { REQUEST_URL } from "../../constants/global";
 import "./style.css";
 const Login = () => {
+  const [person, setPerson] = useState({
+    password: "",
+    email: "",
+  });
+  const [isValid, setIsValid] = useState(true);
+
+  let history = useHistory();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${REQUEST_URL}/user/login`, person, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        if (res.status !== 200) {
+          console.log(res);
+          setIsValid(false);
+          setPerson({
+            password: "",
+            email: "",
+          });
+        } else {
+          console.log(res);
+          localStorage.setItem("user", JSON.stringify(res.data.data));
+          history.push("/home");
+        }
+      })
+      .catch((err) => {
+        setIsValid(false);
+        console.log("ahihi");
+        console.log(err);
+      });
+  };
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setPerson((person) => {
+      return { ...person, [name]: value };
+    });
+  };
   return (
     <div className="login__container">
       <article className="form">
@@ -14,8 +61,8 @@ const Login = () => {
               type="email"
               id="email"
               name="email"
-              // value={person.firstName}
-              // onChange={handleChange}
+              value={person.email}
+              onChange={handleChange}
             />
           </div>
           <div className="form-control">
@@ -24,19 +71,25 @@ const Login = () => {
               type="password"
               id="password"
               name="password"
-              // value={person.firstName}
-              // onChange={handleChange}
+              value={person.password}
+              onChange={handleChange}
             />
           </div>
-          <a className="link block" href="#">
+          {/* <a className="link block" href="#">
             Quên mật khẩu?
-          </a>
-          <button>Đăng nhập</button>
+          </a> */}
+          <p
+            className={isValid ? "hide-text" : "block"}
+            style={{ color: "#ee5253" }}
+          >
+            Thông tin không phù hợp
+          </p>
+          <button onClick={handleSubmit}>Đăng nhập</button>
           <p className="blur-color__text fs08">
             Cần một tài khoản?{" "}
-            <a href="#" className="link">
+            <Link to="/sign-up" className="link">
               Đăng ký
-            </a>
+            </Link>
           </p>
         </form>
       </article>
@@ -44,4 +97,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default React.memo(Login);

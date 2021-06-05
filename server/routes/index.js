@@ -35,7 +35,7 @@ function initRoute(app) {
   );
 
   // user
-  app.post(`${ROOT_URL}/user`, userController().getUserById);
+  app.get(`${ROOT_URL}/user/:userId`, userController().getUserById);
 }
 
 module.exports = initRoute;

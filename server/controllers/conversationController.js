@@ -9,11 +9,10 @@ function conversationController() {
     },
     async createConversation(req, res) {
       const { userId } = req.user;
-      const { receiver, lastMsg } = req.body;
+      const { receiver } = req.body;
       const data = await conversationService().create({
         userId,
         receiver,
-        lastMsg,
       });
       if (data.error) {
         res.status(401).json(data);

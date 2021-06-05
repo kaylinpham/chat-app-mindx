@@ -27,7 +27,7 @@ function App() {
         <Redirect
           exact
           from="/"
-          to={localStorage.getItem("user") ? "/home" : "log-in"}
+          to={localStorage.getItem("user") ? "/home" : "/log-in"}
         />
         <Route path="/log-in" component={Login} />
         <Route path="/sign-up" component={SignUp} />

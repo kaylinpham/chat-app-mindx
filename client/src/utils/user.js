@@ -1,6 +1,6 @@
 import { REQUEST_URL } from "../constants/global";
 export const getUserById = async (id) => {
-  return fetch(`${REQUEST_URL}/user/:${id}`)
+  return fetch(`${REQUEST_URL}/user/${id}`)
     .then((res) => res.json())
     .then((data) => {
       const { avatar, fullName } = data;
@@ -21,9 +21,5 @@ export const getConversationByUserId = async (id) => {
     };
   });
 
-  return Promise.all(userPromise).then((res) => {
-    console.log(res);
-  });
-
-  // return await Promise.all(userPromise);
+  return await Promise.all(userPromise);
 };

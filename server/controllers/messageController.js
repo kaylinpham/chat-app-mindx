@@ -5,13 +5,14 @@ function messageController() {
     async saveMessageToConversation(req, res) {
       try {
         const { userId } = req.user;
-        const { conversationId, content } = req.body;
-        const data = await messageService().save({
-          conversationId,
-          content,
-          sender: userId,
-        });
-        res.status(200).json(data);
+        console.log(userId, req.body);
+        // const { conversationId, content } = req.body;
+        // const data = await messageService().save({
+        //   conversationId,
+        //   content,
+        //   sender: userId,
+        // });
+        // res.status(200).json(data);
       } catch (error) {
         res.status(401).json({
           error: true,

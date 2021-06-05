@@ -1,0 +1,21 @@
+.message__container p {
+  padding: 0.5rem;
+  width: fit-content;
+  max-width: 60%;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  border-radius: 0.4rem;
+}
+.message__container {
+  clear: both;
+  padding: 5px 0;
+}
+.right {
+  float: right;
+  color: white;
+  background: #202225;
+}
+.left {
+  float: left;
+  background: #72767d;
+}

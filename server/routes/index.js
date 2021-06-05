@@ -1,7 +1,7 @@
 const authController = require("../controllers/authController");
 const messageController = require("../controllers/messageController");
 const conversationController = require("../controllers/conversationController");
-
+const userController = require("../controllers/userController");
 // middlewares
 const verifyToken = require("../middlewares/verifyToken");
 
@@ -33,6 +33,9 @@ function initRoute(app) {
     verifyToken,
     conversationController().createConversation
   );
+
+  // user
+  app.post(`${ROOT_URL}/user`, userController().getUserById);
 }
 
 module.exports = initRoute;

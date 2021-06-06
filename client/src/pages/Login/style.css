@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100vw;
 }
 .form {
   background-color: var(--form-bg-color);

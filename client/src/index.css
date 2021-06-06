@@ -4,7 +4,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   padding: 0;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 html {
   height: 100%;
@@ -95,4 +95,13 @@ p {
 input[type="date"] {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.none {
+  display: none;
+}
+#root {
+  display: flex;
+}
+a {
+  text-decoration: none;
 }

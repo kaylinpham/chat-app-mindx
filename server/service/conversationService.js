@@ -4,33 +4,31 @@ const Conversation = require("../models/conversation");
 function conversationService() {
   return {
     async get(userId) {
-      const allConversation = await Conversation.find({
-        usersId: mongoose.Types.ObjectId(userId),
-      });
-      return {
-        error: false,
-        message: "get all conversation successfully",
-        data: allConversation,
-      };
+      try {
+        const allConversation = await Conversation.find({
+          usersId: mongoose.Types.ObjectId(userId),
+        });
+        return {
+          error: false,
+          message: "get all conversation successfully",
+          data: allConversation,
+        };
+      } catch (error) {
+        console.log(error);
+      }
     },
-    async create({ userId, receiver, lastMsg }) {
+    async create({ userId, receiver }) {
       const conversation = new Conversation({
         usersId: [
           mongoose.Types.ObjectId(userId),
           mongoose.Types.ObjectId(receiver),
         ],
-        lastMsg,
       });
       const data = await conversation
         .save()
         .then((con) => {
           return {
-            error: false,
-            message: "save conversation successfully",
-            data: {
-              conversationId: con._id,
-              lastMsg: con.lastMsg,
-            },
+            conversationId: con._id,
           };
         })
         .catch((error) => {

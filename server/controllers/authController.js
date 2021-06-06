@@ -25,6 +25,7 @@ function authController() {
               token,
               userName: user.userName,
               fullName: user.fullName,
+              userId: user._id,
             },
           });
         } else {

@@ -1,5 +1,6 @@
 const conversationService = require("../service/conversationService");
-
+const validConversation = require("../utils/validConversation");
+const User = require("../models/user");
 function conversationController() {
   return {
     async getConversationOfCurrentUser(req, res) {
@@ -9,69 +10,41 @@ function conversationController() {
     },
     async createConversation(req, res) {
       const { userId } = req.user;
-      const { receiver, lastMsg } = req.body;
-      const data = await conversationService().create({
-        userId,
-        receiver,
-        lastMsg,
-      });
-      if (data.error) {
-        res.status(401).json(data);
+      const { userName } = req.body;
+      const receiverUser = await User.find({ userName });
+      if (receiverUser.length !== 0) {
+        const { fullName, avatar, _id: receiver } = receiverUser[0];
+        let validCon = await validConversation(receiver);
+        if (validCon == null) {
+          const data = await conversationService().create({
+            userId,
+            receiver,
+          });
+          if (data.error) {
+            res.status(401).json(data);
+          } else {
+            res.status(200).json({
+              error: false,
+              message: "save conversation successfully",
+              ...data,
+              fullName,
+              avatar,
+            });
+          }
+        } else {
+          res.status(401).json({
+            error: true,
+            message: "conversation already exist",
+          });
+        }
       } else {
-        res.status(200).json(data);
+        res.status(401).json({
+          error: true,
+          message: "This user could not be found",
+        });
       }
     },
   };
 }
 
 module.exports = conversationController;
-
-// const mongoose = require("mongoose");
-// const Conversation = require("../models/conversation");
-
-// function conversationController() {
-//   return {
-//     async getConversationOfCurrentUser(req, res) {
-//       const { id } = req.params;
-//       const allConversation = await Conversation.find({
-//         usersId: mongoose.Types.ObjectId(id),
-//       });
-//       return res.status(200).json({
-//         error: false,
-//         message: "get all conversation successfully",
-//         data: allConversation,
-//       });
-//     },
-//     createConversation(req, res) {
-//       const { userId } = req.user;
-//       const { receiver, lastMsg } = req.body;
-//       const conversation = new Conversation({
-//         usersId: [
-//           mongoose.Types.ObjectId(userId),
-//           mongoose.Types.ObjectId(receiver),
-//         ],
-//         lastMsg,
-//       });
-//       conversation
-//         .save()
-//         .then((con) => {
-//           return res.status(200).json({
-//             error: false,
-//             message: "save conversation successfully",
-//             data: {
-//               conversationId: con._id,
-//               lastMsg: con.lastMsg,
-//             },
-//           });
-//         })
-//         .catch((error) => {
-//           return res.status(401).json({
-//             error: true,
-//             message: error.message,
-//           });
-//         });
-//     },
-//   };
-// }
-
-// module.exports = conversationController;

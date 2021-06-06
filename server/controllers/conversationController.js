@@ -14,7 +14,7 @@ function conversationController() {
       const receiverUser = await User.find({ userName });
       if (receiverUser.length !== 0) {
         const { fullName, avatar, _id: receiver } = receiverUser[0];
-        let validCon = await validConversation(receiver);
+        let validCon = await validConversation(userId, receiver);
         if (validCon == null) {
           const data = await conversationService().create({
             userId,

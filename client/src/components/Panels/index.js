@@ -10,7 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { AuthContext } from "../../pages/Home";
 import { IMAGE_URL } from "../../constants/global";
-import defaultAvt from "../../assets/images/defaultAvatar.png";
+import defaultAvt from "../../assets/images/defaultAvatar.jpeg";
 import logoutIcon from "../../assets/images/logout.png";
 import "./style.css";
 
@@ -37,7 +37,7 @@ const Panels = () => {
     <section className="panels">
       <div className="panels__img">
         <img
-          src={`${IMAGE_URL + user.avatar}` || defaultAvt}
+          src={user.avatar ? `${IMAGE_URL + user.avatar}` : defaultAvt}
           className="avatar sidebar-avt"
         />
       </div>
@@ -97,4 +97,4 @@ const Panels = () => {
   );
 };
 
-export default React.memo(Panels);
+export default Panels;

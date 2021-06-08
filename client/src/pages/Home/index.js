@@ -12,6 +12,7 @@ export const AuthContext = React.createContext();
 const Home = () => {
   const [user, setUser] = useState({ token: "", userName: "", fullName: "" });
   const [conversations, setConversations] = useState([]);
+  const [isFound, setIsFound] = useState(true);
 
   let { path, url } = useRouteMatch();
   let history = useHistory();
@@ -35,23 +36,22 @@ const Home = () => {
     createConversation(user.token, userName)
       .then((res) => {
         console.log(res);
-        if (res.status !== 200) {
-          throw new Error("User not found");
-        } else {
-          const { avatar, conversationId, fullName, receiver } = res.data;
-          const newConversation = {
-            conversationId,
-            fullName,
-            avatar,
-            receiverId: receiver,
-          };
-          setConversations([...conversations, newConversation]);
-        }
+        const { avatar, conversationId, fullName, receiver } = res.data;
+        const newConversation = {
+          conversationId,
+          fullName,
+          avatar,
+          receiverId: receiver,
+        };
+        setIsFound(true);
+        setConversations([...conversations, newConversation]);
       })
       .catch((err) => {
         console.log(err);
+        setIsFound(false);
       });
   };
+  console.log("home");
 
   return (
     <AuthContext.Provider value={{ url, user, conversations }}>
@@ -61,7 +61,9 @@ const Home = () => {
           <Route
             exact
             path={path}
-            component={() => <Default handleAddFriend={handleAddFriend} />}
+            component={() => (
+              <Default handleAddFriend={handleAddFriend} isFound={isFound} />
+            )}
           />
           <Route
             path={`${path}/conversation/:conversationId&&:receiverId`}
@@ -73,4 +75,4 @@ const Home = () => {
   );
 };
 
-export default React.memo(Home);
+export default Home;

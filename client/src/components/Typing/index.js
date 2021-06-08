@@ -1,8 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./style.css";
 import emojisIcon from "../../assets/images/emojis.png";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
+
 const Typing = ({ sendMessage }) => {
   const inputContainer = useRef(null);
+  const [isShow, setIsShow] = useState(false);
 
   const handleSending = (e) => {
     const text = inputContainer.current.value;
@@ -14,6 +18,10 @@ const Typing = ({ sendMessage }) => {
     }
   };
 
+  const handleEmoji = (e) => {
+    inputContainer.current.value += e.native;
+  };
+
   return (
     <div className="typing">
       <input
@@ -23,7 +31,17 @@ const Typing = ({ sendMessage }) => {
         ref={inputContainer}
         onKeyUp={handleSending}
       />
-      <img id="emojis-icon" src={emojisIcon} />
+      <img
+        id="emojis-icon"
+        src={emojisIcon}
+        onClick={() => setIsShow(!isShow)}
+      />
+      {isShow && (
+        <Picker
+          style={{ position: "absolute", bottom: "5rem", right: "1rem" }}
+          onSelect={handleEmoji}
+        />
+      )}
     </div>
   );
 };

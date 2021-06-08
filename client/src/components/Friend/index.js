@@ -1,13 +1,18 @@
 import React from "react";
 import "./style.css";
-import defaultAvt from "../../assets/images/defaultAvatar.png";
+import defaultAvt from "../../assets/images/defaultAvatar.jpeg";
+import { IMAGE_URL } from "../../constants/global";
 
 const Friend = ({ conversation }) => {
   return (
     <div className="friend-item">
       <div className="friend-avt__wrapper">
         <img
-          src={conversation.avatar || defaultAvt}
+          src={
+            conversation.avatar
+              ? `${IMAGE_URL + conversation.avatar}`
+              : defaultAvt
+          }
           className="avatar sidebar-avt"
         />
       </div>

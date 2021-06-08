@@ -58,6 +58,5 @@ export function createConversation(token, userName) {
     })
     .catch((err) => {
       console.log(err);
-      throw err;
     });
 }

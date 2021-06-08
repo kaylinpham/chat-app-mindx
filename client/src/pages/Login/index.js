@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -37,7 +37,6 @@ const Login = () => {
       })
       .catch((err) => {
         setIsValid(false);
-        console.log("ahihi");
         console.log(err);
       });
   };

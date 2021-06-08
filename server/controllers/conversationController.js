@@ -29,6 +29,7 @@ function conversationController() {
               ...data,
               fullName,
               avatar,
+              receiver,
             });
           }
         } else {

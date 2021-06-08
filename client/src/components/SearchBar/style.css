@@ -3,10 +3,10 @@
   box-sizing: border-box;
   border-bottom: 1px solid rgb(31, 28, 28);
   z-index: 2;
-  padding: 8px;
+  padding: 7px;
 }
 .search-bar__input {
-  width: 288px;
+  width: 85%;
   height: 32px;
   background-color: #202225;
   border-radius: 4px;
@@ -18,8 +18,24 @@
   box-sizing: border-box;
   line-height: 32px;
   padding-left: 0.5rem;
+  display: inline;
+  position: relative;
+  top: -8px;
 }
 input {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.home {
+  text-align: center;
+  line-height: 50px;
+  margin-right: 0.6rem;
+  height: 105%;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 10px;
+  width: 32px;
+}
+.home:hover {
+  background-color: rgb(107, 105, 105);
 }

@@ -1,1 +1,11 @@
-
+.private-channels {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+/* @media screen and (min-height: 900px) {
+  .private-channels {
+    height: 848px;
+  }
+} */

@@ -2,4 +2,6 @@
   flex-grow: 1;
   padding: 1rem;
   box-sizing: border-box;
+  height: 600px;
+  overflow: scroll;
 }

@@ -6,7 +6,7 @@ const cors = require("cors");
 const socket = require("socket.io");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
+const path = require("path");
 const PORT = process.env.PORT || 8080;
 const initRoute = require("./routes/index");
 const errorHandler = require("./middlewares/errorHandler");
@@ -31,17 +31,21 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(
+  "/public/images",
+  express.static(path.join(__dirname, "public/images"))
+);
 // route
 initRoute(app);
 
 // error handler
-app.all("*", (req, res, next) => {
-  const err = new Error("The route can not found");
-  err.statusCode = 404;
-  next(err);
-});
+// app.all("*", (req, res, next) => {
+//   const err = new Error("The route can not found");
+//   err.statusCode = 404;
+//   next(err);
+// });
 
-app.use(errorHandler);
+// app.use(errorHandler);
 
 server.listen(PORT, (_) => console.log(`Server running on port ${PORT}`));
 

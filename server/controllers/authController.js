@@ -25,7 +25,6 @@ function authController() {
               token,
               userName: user.userName,
               fullName: user.fullName,
-              userId: user._id,
             },
           });
         } else {
@@ -43,7 +42,8 @@ function authController() {
     },
     async postRegister(req, res) {
       try {
-        const user = await User.create(req.body);
+        let avatar = req.file.filename;
+        const user = await User.create({ ...req.body, avatar });
         const token = jwt.sign({ userId: user._id }, process.env.APP_SECRET);
         res.status(200).json({
           error: false,
@@ -52,6 +52,7 @@ function authController() {
             token,
             userName: user.userName,
             fullName: user.fullName,
+            avatar,
           },
         });
       } catch (error) {

@@ -19,10 +19,18 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    let formData = new FormData();
+    formData.append("fullName", person.fullName);
+    formData.append("email", person.email);
+    formData.append("password", person.password);
+    formData.append("userName", person.userName);
+    formData.append("avatar", person.avatar);
+
     axios
-      .post(`${REQUEST_URL}/user/register`, person, {
+      .post(`${REQUEST_URL}/user/register`, formData, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {

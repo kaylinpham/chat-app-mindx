@@ -9,12 +9,14 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { AuthContext } from "../../pages/Home";
+import { IMAGE_URL } from "../../constants/global";
 import defaultAvt from "../../assets/images/defaultAvatar.png";
 import logoutIcon from "../../assets/images/logout.png";
 import "./style.css";
 
 const Panels = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
   const [open, setOpen] = React.useState(false);
   let history = useHistory();
 
@@ -34,7 +36,10 @@ const Panels = () => {
   return (
     <section className="panels">
       <div className="panels__img">
-        <img src={defaultAvt} className="avatar sidebar-avt" />
+        <img
+          src={`${IMAGE_URL + user.avatar}` || defaultAvt}
+          className="avatar sidebar-avt"
+        />
       </div>
       <div className="panels-username">
         <p>{user.fullName}</p>

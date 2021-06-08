@@ -1,11 +1,11 @@
 import React from "react";
 import "./style.css";
-const Message = (props) => {
+const Message = ({ isYours, content }) => {
   return (
     <div className="message__container">
-      <p className={props.isYours ? "right" : "left"}>haha</p>
+      <p className={isYours ? "right" : "left"}>{content}</p>
     </div>
   );
 };
 
-export default Message;
+export default React.memo(Message);

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 
+import { getConversationByUserId, createConversation } from "../../utils/api";
 import ChatBox from "../../components/ChatBox";
 import Default from "../../components/Default";
 import SideBar from "../../components/SideBar";
-import NotFound from "../NotFound";
 import "./style.css";
 
 export const AuthContext = React.createContext();
 
 const Home = () => {
   const [user, setUser] = useState({ token: "", userName: "", fullName: "" });
+  const [conversations, setConversations] = useState([]);
+
   let { path, url } = useRouteMatch();
   let history = useHistory();
 
@@ -23,17 +25,48 @@ const Home = () => {
     }
   }, []);
 
+  useEffect(() => {
+    getConversationByUserId(user.userId).then((data) => {
+      setConversations(data);
+    });
+  }, []);
+
+  const handleAddFriend = (userName) => {
+    createConversation(user.token, userName)
+      .then((res) => {
+        console.log(res);
+        if (res.status !== 200) {
+          throw new Error("User not found");
+        } else {
+          const { avatar, conversationId, fullName, receiver } = res.data;
+          const newConversation = {
+            conversationId,
+            fullName,
+            avatar,
+            receiverId: receiver,
+          };
+          setConversations([...conversations, newConversation]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <AuthContext.Provider value={{ url, user }}>
+    <AuthContext.Provider value={{ url, user, conversations }}>
       <div className="home__container">
         <SideBar />
         <Switch>
-          <Route exact path={path} component={Default} />
           <Route
-            path={`${path}/conversation/:conversationId`}
+            exact
+            path={path}
+            component={() => <Default handleAddFriend={handleAddFriend} />}
+          />
+          <Route
+            path={`${path}/conversation/:conversationId&&:receiverId`}
             component={ChatBox}
           />
-          {/* <Route path={`${path}/*`} render={history.push("/error")} /> */}
         </Switch>
       </div>
     </AuthContext.Provider>

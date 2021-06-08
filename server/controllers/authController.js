@@ -21,6 +21,7 @@ function authController() {
             error: false,
             message: "login successful",
             data: {
+              userId: user._id,
               token,
               userName: user.userName,
               fullName: user.fullName,

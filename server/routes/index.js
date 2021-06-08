@@ -14,6 +14,7 @@ function initRoute(app) {
   // message
   app.get(
     `${ROOT_URL}/message/:id_conversation`,
+    verifyToken,
     messageController().getAllMessageByConversationId
   );
   app.post(

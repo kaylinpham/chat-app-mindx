@@ -3,7 +3,7 @@
   height: 100vh;
   color: rgb(138, 138, 138);
   font-size: 10rem;
-  width: 100vw;
+  width: 100%;
   text-align: center;
 }
 .not-found__img {

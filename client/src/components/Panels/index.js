@@ -10,13 +10,12 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { AuthContext } from "../../pages/Home";
 import { IMAGE_URL } from "../../constants/global";
-import defaultAvt from "../../assets/images/defaultAvatar.jpeg";
+import defaultAvt from "../../assets/images/defaultAvatar.png";
 import logoutIcon from "../../assets/images/logout.png";
 import "./style.css";
 
 const Panels = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
   const [open, setOpen] = React.useState(false);
   let history = useHistory();
 

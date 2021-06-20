@@ -1,9 +1,19 @@
 import React, { useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
+
 import Message from "../Message";
 import "./style.css";
+
 const Conversation = ({ messages }) => {
-  const { userId } = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
   const divContainer = useRef(null);
+  let history = useHistory();
+
+  useEffect(() => {
+    if (!user) {
+      history.push("/error");
+    }
+  }, []);
 
   useEffect(() => {
     divContainer.current.scrollIntoView({ block: "start" });
@@ -14,7 +24,8 @@ const Conversation = ({ messages }) => {
       {messages.map((message) => {
         return (
           <Message
-            isYours={message.sender === userId}
+            key={message._id}
+            isYours={message.sender === user.userId}
             content={message.content}
           />
         );

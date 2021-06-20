@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import { getUserById } from "../../utils/api";
 import "./style.css";
@@ -10,9 +10,13 @@ import callIcon from "../../assets/images/call.png";
 const Title = () => {
   const { receiverId } = useParams();
   const [name, setName] = useState("");
+  // let history = useHistory();
 
   useEffect(async () => {
     const { fullName } = await getUserById(receiverId);
+    // if (!fullName) {
+    //   history.push("/error");
+    // }
     setName(fullName);
   }, [receiverId]);
 

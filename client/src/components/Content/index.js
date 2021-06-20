@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 
 import Conversation from "../Conversation";
@@ -7,7 +7,6 @@ import Typing from "../Typing";
 import "./style.css";
 
 import { getAllMessage } from "../../utils/api";
-// import { socket } from "../../App";
 import { CONNECTION_PORT } from "../../constants/global";
 
 let socket;
@@ -15,6 +14,7 @@ let socket;
 const Content = () => {
   const [messages, setMessages] = useState([]);
   const { conversationId } = useParams();
+  let history = useHistory();
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -24,9 +24,13 @@ const Content = () => {
 
   useEffect(() => {
     socket.emit("join_room", conversationId);
-    getAllMessage(conversationId, user.token).then((data) => {
-      setMessages(data);
-    });
+    if (user) {
+      getAllMessage(conversationId, user.token).then((data) => {
+        setMessages(data);
+      });
+    } else {
+      history.push("/error");
+    }
   }, [conversationId]);
 
   useEffect(() => {

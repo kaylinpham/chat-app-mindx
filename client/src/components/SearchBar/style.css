@@ -3,7 +3,7 @@
   box-sizing: border-box;
   border-bottom: 1px solid rgb(31, 28, 28);
   z-index: 2;
-  padding: 7px;
+  padding: 7px 0.2rem;
 }
 .search-bar__input {
   width: 85%;
@@ -29,7 +29,7 @@ input {
 .home {
   text-align: center;
   line-height: 50px;
-  margin-right: 0.6rem;
+  margin-right: 0.2rem;
   height: 105%;
   cursor: pointer;
   display: inline-block;

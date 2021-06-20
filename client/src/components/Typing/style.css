@@ -2,6 +2,7 @@
   height: 68px;
   box-sizing: border-box;
   padding: 0 1rem;
+  padding-top: 0.5rem;
 }
 .message-typing {
   width: 100%;
@@ -17,8 +18,16 @@
 }
 #emojis-icon {
   position: absolute;
-  bottom: 1.9rem;
+  bottom: 1.4rem;
   right: 2rem;
   width: 32px;
   cursor: pointer;
+  z-index: 2;
+}
+.emoji__wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

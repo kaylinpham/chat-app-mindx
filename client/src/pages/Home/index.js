@@ -5,6 +5,7 @@ import { getConversationByUserId, createConversation } from "../../utils/api";
 import ChatBox from "../../components/ChatBox";
 import Default from "../../components/Default";
 import SideBar from "../../components/SideBar";
+import NotFound from "../NotFound";
 import "./style.css";
 
 export const AuthContext = React.createContext();
@@ -27,9 +28,11 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    getConversationByUserId(user.userId).then((data) => {
-      setConversations(data);
-    });
+    if (user) {
+      getConversationByUserId(user.userId).then((data) => {
+        setConversations(data);
+      });
+    }
   }, []);
 
   const handleAddFriend = (userName) => {
@@ -69,6 +72,7 @@ const Home = () => {
             path={`${path}/conversation/:conversationId&&:receiverId`}
             component={ChatBox}
           />
+          <Route path={`${path}/*`} component={NotFound} />
         </Switch>
       </div>
     </AuthContext.Provider>

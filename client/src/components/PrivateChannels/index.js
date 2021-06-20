@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
+
 import FriendScroller from "../FriendScroller";
 import SearchBar from "../SearchBar";
+
 import "./style.css";
 import { getConversationByUserId } from "../../utils/api";
 import { AuthContext } from "../../pages/Home";
@@ -12,9 +14,11 @@ const PrivateChannels = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    getConversationByUserId(user.userId).then((data) => {
-      setConversations(data);
-    });
+    if (user) {
+      getConversationByUserId(user.userId).then((data) => {
+        setConversations(data);
+      });
+    }
   }, []);
 
   useEffect(() => {

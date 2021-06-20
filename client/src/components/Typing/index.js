@@ -37,10 +37,12 @@ const Typing = ({ sendMessage }) => {
         onClick={() => setIsShow(!isShow)}
       />
       {isShow && (
-        <Picker
-          style={{ position: "absolute", bottom: "5rem", right: "1rem" }}
-          onSelect={handleEmoji}
-        />
+        <div className="emoji__wrapper" onClick={() => setIsShow(false)}>
+          <Picker
+            style={{ position: "absolute", bottom: "4.3rem", right: "1rem" }}
+            onSelect={handleEmoji}
+          />
+        </div>
       )}
     </div>
   );

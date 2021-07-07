@@ -1,16 +1,7 @@
 .friend__scroller {
   padding: 8px;
   box-sizing: border-box;
-  /* height: calc(100vh-100px); */
-}
-.friends {
-  box-sizing: border-box;
+  flex-grow: 1;
+  height: 500px;
   overflow: scroll;
-  height: 670px;
-  /* height: 100%; */
-}
-@media screen and (min-height: 900px) {
-  .friends {
-    height: 784px;
-  }
 }

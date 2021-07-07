@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { REQUEST_URL } from "../../constants/global";
 import "./style.css";
+
 const Login = () => {
   const [person, setPerson] = useState({
     password: "",
@@ -37,7 +38,6 @@ const Login = () => {
       })
       .catch((err) => {
         setIsValid(false);
-        console.log("ahihi");
         console.log(err);
       });
   };

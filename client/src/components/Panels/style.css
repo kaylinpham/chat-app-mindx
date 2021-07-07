@@ -32,15 +32,22 @@
 }
 #logout__icon {
   height: 100%;
+  width: 100%;
+}
+#home__icon {
+  height: 80%;
 }
 .logout {
   cursor: pointer;
   width: 36px;
   border-radius: 50%;
-}
-.logout:hover {
   background-color: rgb(107, 105, 105);
 }
+
+.logout:hover {
+  background-color: #b9bbbe;
+}
+
 .app-font {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;

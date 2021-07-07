@@ -22,3 +22,6 @@
 .friend-item:hover {
   background-color: rgb(79, 84, 92, 0.4);
 }
+.sidebar-avt {
+  height: 100%;
+}

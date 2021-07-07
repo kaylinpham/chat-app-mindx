@@ -1,29 +1,19 @@
 import React from "react";
+
 import "./style.css";
 import Friend from "../Friend";
-const FriendScroller = () => {
+
+const FriendScroller = ({ conversations }) => {
   return (
     <div className="friend__scroller">
-      <div className="friends">
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
-      </div>
+      {conversations.map((conversation) => {
+        return (
+          <Friend
+            key={conversation.conversationId}
+            conversation={conversation}
+          />
+        );
+      })}
     </div>
   );
 };

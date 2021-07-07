@@ -4,13 +4,12 @@ const conversationController = require("../controllers/conversationController");
 const userController = require("../controllers/userController");
 // middlewares
 const verifyToken = require("../middlewares/verifyToken");
-const { upload, uploadImage } = require("../utils/upload");
+const { uploadImage } = require("../utils/upload");
 
 function initRoute(app) {
   const ROOT_URL = "/api/v1";
   // auth
   app.post(`${ROOT_URL}/user/login`, authController().postLogin);
-  // app.post(`${ROOT_URL}/user/register`, authController().postRegister);
   app.post(
     `${ROOT_URL}/user/register`,
     uploadImage,

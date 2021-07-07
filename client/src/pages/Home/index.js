@@ -4,7 +4,7 @@ import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import ChatBox from "../../components/ChatBox";
 import Default from "../../components/Default";
 import SideBar from "../../components/SideBar";
-import NotFound from "../NotFound";
+// import NotFound from "../NotFound";
 import "./style.css";
 
 export const AuthContext = React.createContext();
@@ -21,7 +21,7 @@ const Home = () => {
     } else {
       setUser(auth);
     }
-  }, []);
+  }, [history]);
 
   return (
     <AuthContext.Provider value={{ url, user }}>

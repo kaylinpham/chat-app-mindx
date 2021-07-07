@@ -19,14 +19,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    let formData = new FormData();
-    formData.append("fullName", person.fullName);
-    formData.append("email", person.email);
-    formData.append("password", person.password);
-    formData.append("userName", person.userName);
-    formData.append("avatar", person.avatar);
-
+    let formData = new FormData(e.target);
     axios
       .post(`${REQUEST_URL}/user/register`, formData, {
         headers: {
@@ -63,7 +56,7 @@ const SignUp = () => {
   return (
     <div className="signup__container">
       <article className="form">
-        <form>
+        <form onSubmit={handleSubmit}>
           <h1 className="text__center">Tạo tài khoản</h1>
           <div className="form-control">
             <label htmlFor="email">Email*: </label>
@@ -121,7 +114,7 @@ const SignUp = () => {
           >
             Thông tin không phù hợp
           </p>
-          <button onClick={handleSubmit}>Đăng ký</button>
+          <button type="submit">Đăng ký</button>
           <Link className="link block" to="/log-in">
             Đã có tài khoản?
           </Link>

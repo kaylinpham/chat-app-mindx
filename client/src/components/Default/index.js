@@ -18,7 +18,7 @@ const Default = ({ handleAddFriend, isFound }) => {
 
   return (
     <div className="default">
-      <img src={defaultImg} />
+      <img src={defaultImg} alt="avatar" />
       <div className="typing">
         <input
           type="text"

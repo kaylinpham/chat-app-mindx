@@ -15,7 +15,8 @@
   flex-grow: 1;
 }
 .title-img {
-  width: 24px;
+  width: 30px;
+  height: 30px;
 }
 .title-username {
   height: 32px;

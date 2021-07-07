@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { getUserById } from "../../utils/api";
 import "./style.css";
@@ -9,29 +9,42 @@ import videoIcon from "../../assets/images/video.png";
 import callIcon from "../../assets/images/call.png";
 const Title = () => {
   const { receiverId } = useParams();
-  const [name, setName] = useState("");
+  const [receiverInfo, setReceiverInfo] = useState({
+    fullName: "",
+    avatar: "",
+  });
   // let history = useHistory();
 
-  useEffect(async () => {
-    const { fullName } = await getUserById(receiverId);
-    // if (!fullName) {
-    //   history.push("/error");
-    // }
-    setName(fullName);
+  useEffect(() => {
+    (async () => {
+      const { fullName, avatar } = await getUserById(receiverId);
+      setReceiverInfo({ fullName, avatar });
+    })();
   }, [receiverId]);
 
+  let avatar = receiverInfo.avatar
+    ? `http://localhost:8080/public/images/${receiverInfo.avatar}`
+    : titleIcon;
   return (
     <div className="title">
       <div className="title-username__wrapper">
-        <img className="title-img" src={titleIcon} />
-        <span className="title-username">{name}</span>
+        <img className="title-img avatar" src={avatar} alt="" />
+        <span className="title-username">
+          {receiverInfo.fullName || "Anonymous"}
+        </span>
       </div>
       <div className="toolbar">
         <div className="toolbar-item__wrapper">
-          <img src={callIcon} id="toolbar-phone" className="toolbar-item" />
+          <img
+            src={callIcon}
+            id="toolbar-phone"
+            className="toolbar-item"
+            alt="call Icon"
+          />
         </div>
         <div className="toolbar-item__wrapper">
           <img
+            alt="video Icon"
             src={videoIcon}
             id="toolbar-videocall"
             className="toolbar-item "

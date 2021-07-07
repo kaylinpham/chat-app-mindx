@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 
@@ -31,7 +31,7 @@ const Content = () => {
     } else {
       history.push("/error");
     }
-  }, [conversationId]);
+  }, [conversationId, user, history]);
 
   useEffect(() => {
     socket.on("receiver_message", (data) => {

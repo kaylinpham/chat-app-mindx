@@ -33,7 +33,7 @@ const Home = () => {
         setConversations(data);
       });
     }
-  }, []);
+  }, [user]);
 
   const handleAddFriend = (userName) => {
     createConversation(user.token, userName)

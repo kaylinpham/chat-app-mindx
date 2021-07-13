@@ -6,8 +6,6 @@ import Title from "../Title";
 import "./style.css";
 
 const ChatBox = () => {
-  console.log("chatbox");
-
   return (
     <div className="chatbox">
       <Title />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 
@@ -7,7 +7,6 @@ import Typing from "../Typing";
 import "./style.css";
 
 import { getAllMessage } from "../../utils/api";
-// import { socket } from "../../App";
 import { CONNECTION_PORT } from "../../constants/global";
 
 let socket;
@@ -20,6 +19,7 @@ const Content = () => {
 
   useEffect(() => {
     socket = io(CONNECTION_PORT);
+    console.log("2");
   }, []);
 
   useEffect(() => {
@@ -27,7 +27,8 @@ const Content = () => {
     getAllMessage(conversationId, user.token).then((data) => {
       setMessages(data);
     });
-  }, [conversationId]);
+    console.log("3");
+  }, [conversationId, user.token]);
 
   useEffect(() => {
     socket.on("receiver_message", (data) => {

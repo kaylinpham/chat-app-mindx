@@ -3,7 +3,13 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
 import "./style.css";
-import { REQUEST_URL } from "../../constants/global";
+import {
+  EMAIL_PATTERN,
+  NO_DIGITS,
+  PASSSWORD,
+  REQUEST_URL,
+  USERNAME,
+} from "../../constants/global";
 
 const SignUp = () => {
   const [person, setPerson] = useState({
@@ -14,6 +20,7 @@ const SignUp = () => {
     avatar: "",
   });
   const [isValid, setIsValid] = useState(true);
+  const [validSignup, setValidSignup] = useState(true);
 
   let history = useHistory();
 
@@ -27,29 +34,23 @@ const SignUp = () => {
     formData.append("userName", person.userName);
     formData.append("avatar", person.avatar);
 
-    axios
-      .post(`${REQUEST_URL}/user/register`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        if (res.status !== 200) {
-          console.log(res);
-          setIsValid(false);
-          setPerson({
-            password: "",
-            ...person,
-          });
-        } else {
+    if (validSignup) {
+      axios
+        .post(`${REQUEST_URL}/user/register`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
           history.push("/log-in");
-        }
-      })
-      .catch((err) => {
-        // alert(err);
-        setIsValid(false);
-        console.log(err);
-      });
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsValid(false);
+        });
+    } else {
+      setIsValid(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -60,6 +61,18 @@ const SignUp = () => {
     });
   };
 
+  const handlePattern = (e) => {
+    const value = e.target.value;
+    const pattern = new RegExp(e.target.pattern);
+    if (value === "" || !pattern.test(value)) {
+      e.target.classList.add("form__input-wrong");
+      setValidSignup(() => false);
+    } else {
+      e.target.classList.remove("form__input-wrong");
+      setValidSignup(() => true);
+    }
+  };
+
   return (
     <div className="signup__container">
       <article className="form">
@@ -68,59 +81,85 @@ const SignUp = () => {
           <div className="form-control">
             <label htmlFor="email">Email*: </label>
             <input
+              pattern={EMAIL_PATTERN}
+              className="form__input"
               type="email"
               id="email"
               name="email"
               value={person.email}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                handlePattern(e);
+              }}
+              required
             />
           </div>
           <div className="form-control">
             <label htmlFor="fullName">Họ và tên*: </label>
             <input
+              pattern={NO_DIGITS}
+              className="form__input"
               type="text"
               id="fullName"
               name="fullName"
               value={person.fullName}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                handlePattern(e);
+              }}
+              required
             />
           </div>
           <div className="form-control">
             <label htmlFor="userName">Tên đăng nhập*: </label>
             <input
+              pattern={USERNAME}
+              className="form__input"
               type="text"
               id="userName"
               name="userName"
               value={person.userName}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                handlePattern(e);
+              }}
+              required
             />
           </div>
           <div className="form-control">
             <label htmlFor="password">Mật khẩu*: </label>
             <input
+              pattern={PASSSWORD}
+              className="form__input"
               type="password"
               id="password"
               name="password"
               placeholder="Ít nhất 6 kí tự"
               value={person.password}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                handlePattern(e);
+              }}
+              required
             />
           </div>
           <div className="form-control">
-            <label htmlFor="avatar">Avatar: </label>
+            <label htmlFor="avatar">Avatar*: </label>
             <input
+              className="form__input"
               type="file"
               id="avatar"
               name="avatar"
               onChange={handleChange}
             />
           </div>
-          <p
+          <div
             className={isValid ? "hide-text" : "block"}
             style={{ color: "#ee5253" }}
           >
-            Thông tin không phù hợp
-          </p>
+            <p>Điền đầy đủ các thông tin</p>
+            <p>Email hoặc username có thể đã tồn tại!</p>
+          </div>
           <button onClick={handleSubmit}>Đăng ký</button>
           <Link className="link block" to="/log-in">
             Đã có tài khoản?

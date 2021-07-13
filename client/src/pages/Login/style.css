@@ -17,7 +17,7 @@
 .blur-color__text {
   color: rgb(124, 124, 124);
 }
-.form input {
+.form__input {
   background: rgb(82, 81, 81);
   border-color: transparent;
   border-radius: var(--radius);
@@ -41,7 +41,7 @@
   background: #5765f2;
   color: var(--clr-white);
   border-color: transparent;
-  margin: 1.5rem 0 0.5rem 0;
+  margin: 1rem 0 0.5rem 0;
   letter-spacing: var(--spacing);
   padding: 0.5rem;
   text-transform: capitalize;

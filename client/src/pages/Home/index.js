@@ -1,70 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import { getConversationByUserId, createConversation } from "../../utils/api";
+import { fetchConversations } from "../../redux/conversation/conversationActions";
 import ChatBox from "../../components/ChatBox";
 import Default from "../../components/Default";
 import SideBar from "../../components/SideBar";
 import "./style.css";
+import { login } from "../../redux/user/userActions";
 
 export const AuthContext = React.createContext();
 
 const Home = () => {
-  const [user, setUser] = useState({ token: "", userName: "", fullName: "" });
-  const [conversations, setConversations] = useState([]);
-  const [isFound, setIsFound] = useState(true);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const dispatch = useDispatch();
 
   let { path, url } = useRouteMatch();
   let history = useHistory();
 
   useEffect(() => {
-    const auth = JSON.parse(localStorage.getItem("user"));
-    if (!auth) {
+    if (!user) {
       history.push("/error");
     } else {
-      setUser(auth);
+      dispatch(login(user));
     }
   }, []);
 
   useEffect(() => {
-    getConversationByUserId(user.userId).then((data) => {
-      setConversations(data);
-    });
+    dispatch(fetchConversations);
   }, []);
 
-  const handleAddFriend = (userName) => {
-    createConversation(user.token, userName)
-      .then((res) => {
-        console.log(res);
-        const { avatar, conversationId, fullName, receiver } = res.data;
-        const newConversation = {
-          conversationId,
-          fullName,
-          avatar,
-          receiverId: receiver,
-        };
-        setIsFound(true);
-        setConversations([...conversations, newConversation]);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsFound(false);
-      });
-  };
   console.log("home");
 
   return (
-    <AuthContext.Provider value={{ url, user, conversations }}>
+    <AuthContext.Provider value={{ url }}>
       <div className="home__container">
         <SideBar />
         <Switch>
-          <Route
-            exact
-            path={path}
-            component={() => (
-              <Default handleAddFriend={handleAddFriend} isFound={isFound} />
-            )}
-          />
+          <Route exact path={path} component={() => <Default />} />
           <Route
             path={`${path}/conversation/:conversationId&&:receiverId`}
             component={ChatBox}

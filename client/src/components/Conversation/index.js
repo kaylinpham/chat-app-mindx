@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import Message from "../Message";
 import "./style.css";
 const Conversation = ({ messages }) => {
-  const { userId } = JSON.parse(localStorage.getItem("user"));
+  const { userId } = useSelector((state) => state.user.user);
   const divContainer = useRef(null);
 
   useEffect(() => {
@@ -14,6 +15,7 @@ const Conversation = ({ messages }) => {
       {messages.map((message) => {
         return (
           <Message
+            key={message._id}
             isYours={message.sender === userId}
             content={message.content}
           />

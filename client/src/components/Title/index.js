@@ -11,24 +11,32 @@ const Title = () => {
   const { receiverId } = useParams();
   const [name, setName] = useState("");
 
-  useEffect(async () => {
-    const { fullName } = await getUserById(receiverId);
-    setName(fullName);
+  useEffect(() => {
+    (async () => {
+      const { fullName } = await getUserById(receiverId);
+      setName(fullName);
+    })();
   }, [receiverId]);
 
   return (
     <div className="title">
       <div className="title-username__wrapper">
-        <img className="title-img" src={titleIcon} />
+        <img className="title-img" src={titleIcon} alt="@" />
         <span className="title-username">{name}</span>
       </div>
       <div className="toolbar">
         <div className="toolbar-item__wrapper">
-          <img src={callIcon} id="toolbar-phone" className="toolbar-item" />
+          <img
+            src={callIcon}
+            alt="phone"
+            id="toolbar-phone"
+            className="toolbar-item"
+          />
         </div>
         <div className="toolbar-item__wrapper">
           <img
             src={videoIcon}
+            alt="video-call"
             id="toolbar-videocall"
             className="toolbar-item "
           />

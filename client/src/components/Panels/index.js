@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
@@ -8,14 +8,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import { AuthContext } from "../../pages/Home";
 import { IMAGE_URL } from "../../constants/global";
-import defaultAvt from "../../assets/images/defaultAvatar.png";
+import defaultAvt from "../../assets/images/defaultAvatar.jpeg";
 import logoutIcon from "../../assets/images/logout.png";
 import "./style.css";
+import { useSelector } from "react-redux";
 
 const Panels = () => {
-  const { user } = useContext(AuthContext);
+  const user = useSelector((state) => state.user.user);
   const [open, setOpen] = React.useState(false);
   let history = useHistory();
 
@@ -37,6 +37,7 @@ const Panels = () => {
       <div className="panels__img">
         <img
           src={user.avatar ? `${IMAGE_URL + user.avatar}` : defaultAvt}
+          alt="your-avatar"
           className="avatar sidebar-avt"
         />
       </div>
@@ -45,7 +46,7 @@ const Panels = () => {
         <p className="blur-color__text">{`#${user.userName}`}</p>
       </div>
       <div className="logout" onClick={handleClickOpen}>
-        <img src={logoutIcon} id="logout__icon" />
+        <img src={logoutIcon} id="logout__icon" alt="logout" />
       </div>
       <Dialog
         open={open}

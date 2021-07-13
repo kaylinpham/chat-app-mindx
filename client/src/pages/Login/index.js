@@ -31,7 +31,6 @@ const Login = () => {
             email: "",
           });
         } else {
-          console.log(res);
           localStorage.setItem("user", JSON.stringify(res.data.data));
           history.push("/home");
         }
@@ -58,6 +57,7 @@ const Login = () => {
           <div className="form-control">
             <label htmlFor="email">Email: </label>
             <input
+              className="form__input"
               type="email"
               id="email"
               name="email"
@@ -68,6 +68,7 @@ const Login = () => {
           <div className="form-control">
             <label htmlFor="password">Mật khẩu: </label>
             <input
+              className="form__input"
               type="password"
               id="password"
               name="password"

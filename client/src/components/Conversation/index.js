@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 
+import { useSelector } from "react-redux";
 import Message from "../Message";
 import "./style.css";
 
 const Conversation = ({ messages }) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = useSelector((state) => state.user.user);
+  const { userId } = useSelector((state) => state.user.user);
   const divContainer = useRef(null);
   let history = useHistory();
 
@@ -25,7 +27,7 @@ const Conversation = ({ messages }) => {
         return (
           <Message
             key={message._id}
-            isYours={message.sender === user.userId}
+            isYours={message.sender === userId}
             content={message.content}
           />
         );

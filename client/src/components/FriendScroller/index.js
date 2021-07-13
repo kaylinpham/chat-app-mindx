@@ -1,8 +1,6 @@
 import React from "react";
-
 import "./style.css";
 import Friend from "../Friend";
-
 const FriendScroller = ({ conversations }) => {
   return (
     <div className="friend__scroller">

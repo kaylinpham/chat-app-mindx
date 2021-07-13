@@ -35,6 +35,7 @@ const Typing = ({ sendMessage }) => {
         alt=""
         id="emojis-icon"
         src={emojisIcon}
+        alt="icons"
         onClick={() => setIsShow(!isShow)}
       />
       {isShow && (

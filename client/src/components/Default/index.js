@@ -1,24 +1,38 @@
 import React, { useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./style.css";
 import defaultImg from "../../assets/images/default.png";
+import { addConversation } from "../../redux/conversation/conversationActions";
 
-const Default = ({ handleAddFriend, isFound }) => {
+const Default = () => {
   const inputContainer = useRef(null);
+  const isFound = useSelector((state) => state.conversation.isFound);
+  const { token } = useSelector((state) => state.user.user.token);
+  const dispatch = useDispatch();
 
   const handleFinding = (e) => {
-    const text = inputContainer.current.value;
     if (e.keyCode === 13) {
-      if (text.trim() !== "") {
-        handleAddFriend(text);
-      }
-      inputContainer.current.value = "";
+      handleBtn();
     }
+  };
+
+  const handleAddFriend = (userName) => {
+    const addConversationThunk = addConversation(token, userName);
+    dispatch(addConversationThunk);
+  };
+
+  const handleBtn = () => {
+    const text = inputContainer.current.value;
+    if (text.trim() !== "") {
+      handleAddFriend(text.trim());
+    }
+    inputContainer.current.value = "";
   };
 
   return (
     <div className="default">
-      <img src={defaultImg} alt="avatar" />
+      <img src={defaultImg} alt="monster-finds-friend" />
       <div className="typing">
         <input
           type="text"
@@ -27,7 +41,7 @@ const Default = ({ handleAddFriend, isFound }) => {
           onKeyUp={handleFinding}
           ref={inputContainer}
         />
-        <button id="add-friend__btn" className="btn">
+        <button id="add-friend__btn" className="btn" onClick={handleBtn}>
           + Thêm bạn
         </button>
         <br />

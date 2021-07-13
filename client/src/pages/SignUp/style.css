@@ -10,3 +10,6 @@
 .hide-text {
   text-indent: -9999px;
 }
+.form__input-wrong {
+  border: solid 2px #ee5253;
+}

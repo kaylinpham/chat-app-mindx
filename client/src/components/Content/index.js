@@ -20,6 +20,7 @@ const Content = () => {
 
   useEffect(() => {
     socket = io(CONNECTION_PORT);
+    console.log("2");
   }, []);
 
   useEffect(() => {

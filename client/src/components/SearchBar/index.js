@@ -8,7 +8,7 @@ const SearchBar = ({ handleSearching }) => {
   return (
     <div className="search-bar">
       <Link to="/home" className="home">
-        <img src={homeIcon} id="home__icon" />
+        <img src={homeIcon} alt="home" id="home__icon" />
       </Link>
       <input
         className="search-bar__input"

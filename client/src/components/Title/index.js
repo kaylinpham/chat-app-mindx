@@ -9,43 +9,35 @@ import videoIcon from "../../assets/images/video.png";
 import callIcon from "../../assets/images/call.png";
 const Title = () => {
   const { receiverId } = useParams();
-  const [receiverInfo, setReceiverInfo] = useState({
-    fullName: "",
-    avatar: "",
-  });
-  // let history = useHistory();
+  const [name, setName] = useState("");
 
   useEffect(() => {
     (async () => {
-      const { fullName, avatar } = await getUserById(receiverId);
-      setReceiverInfo({ fullName, avatar });
+      const { fullName } = await getUserById(receiverId);
+      setName(fullName);
     })();
   }, [receiverId]);
 
-  let avatar = receiverInfo.avatar
-    ? `http://localhost:8080/public/images/${receiverInfo.avatar}`
-    : titleIcon;
   return (
     <div className="title">
       <div className="title-username__wrapper">
-        <img className="title-img avatar" src={avatar} alt="" />
-        <span className="title-username">
-          {receiverInfo.fullName || "Anonymous"}
-        </span>
+        <img className="title-img" src={titleIcon} alt="@" />
+        <span className="title-username">{name}</span>
       </div>
       <div className="toolbar">
         <div className="toolbar-item__wrapper">
           <img
             src={callIcon}
+            alt="phone"
             id="toolbar-phone"
             className="toolbar-item"
-            alt="call Icon"
           />
         </div>
         <div className="toolbar-item__wrapper">
           <img
             alt="video Icon"
             src={videoIcon}
+            alt="video-call"
             id="toolbar-videocall"
             className="toolbar-item "
           />

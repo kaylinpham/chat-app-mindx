@@ -1,0 +1,52 @@
+.title {
+  height: 48px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgb(31, 28, 28);
+  z-index: 2;
+  display: flex;
+  padding: 8px 1rem;
+  line-height: 48px;
+
+  &-img {
+    width: 30px;
+    height: 30px;
+  }
+
+  &-username {
+    height: 32px;
+    vertical-align: super;
+    margin-left: 0.5rem;
+    color: white;
+    font-weight: 600;
+
+    &__wrapper {
+      width: max-content;
+      padding-right: 1rem;
+      margin-top: -8px;
+      text-align: start;
+      flex-grow: 1;
+    }
+  }
+}
+.toolbar {
+  width: 90px;
+  line-height: 32px;
+  display: flex;
+  justify-content: space-around;
+
+  &-item {
+    height: 100%;
+    width: 100%;
+
+    &__wrapper {
+      cursor: pointer;
+      width: 31px;
+      border-radius: 50%;
+      padding: 1px;
+
+      &:hover {
+        background-color: rgb(107, 105, 105);
+      }
+    }
+  }
+}

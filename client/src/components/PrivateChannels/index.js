@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FriendScroller from "../FriendScroller";
 import SearchBar from "../SearchBar";
 
-import "./style.css";
+import "./style.scss";
 import { useSelector } from "react-redux";
 
 const PrivateChannels = () => {

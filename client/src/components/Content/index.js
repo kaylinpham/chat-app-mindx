@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 
 import Conversation from "../Conversation";
 import Typing from "../Typing";
-import "./style.css";
+import "./style.scss";
 
 import { getAllMessage } from "../../utils/api";
 import { CONNECTION_PORT } from "../../constants/global";
@@ -32,7 +32,7 @@ const Content = () => {
     } else {
       history.push("/error");
     }
-  }, [conversationId, user, history]);
+  }, [conversationId]);
 
   useEffect(() => {
     socket.on("receiver_message", (data) => {

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./style.css";
+import "./style.scss";
 import emojisIcon from "../../assets/images/emojis.png";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";

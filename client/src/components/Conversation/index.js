@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import Message from "../Message";
-import "./style.css";
+import "./style.scss";
 
 const Conversation = ({ messages }) => {
   const user = useSelector((state) => state.user.user);

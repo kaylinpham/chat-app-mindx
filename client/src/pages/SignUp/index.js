@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
-import "./style.css";
+import "./style.scss";
 import {
   EMAIL_PATTERN,
   NO_DIGITS,

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import "./style.css";
+import "./style.scss";
 import defaultImg from "../../assets/images/default.png";
 import { addConversation } from "../../redux/conversation/conversationActions";
 

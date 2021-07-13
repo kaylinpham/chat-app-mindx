@@ -11,7 +11,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { IMAGE_URL } from "../../constants/global";
 import defaultAvt from "../../assets/images/defaultAvatar.jpeg";
 import logoutIcon from "../../assets/images/logout.png";
-import "./style.css";
+import "./style.scss";
 import { useSelector } from "react-redux";
 
 const Panels = () => {

@@ -5,10 +5,12 @@
   box-sizing: border-box;
   padding-top: 2rem;
   text-align: center;
+
+  img {
+    width: 400px;
+  }
 }
-.default img {
-  width: 400px;
-}
+
 .add-friend-typing {
   width: 40%;
   box-sizing: border-box;
@@ -25,8 +27,7 @@
 #add-friend__btn {
   font-size: 1rem;
   font-weight: 600;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
   display: inline-block;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { getUserById } from "../../utils/api";
-import "./style.css";
+import "./style.scss";
 
 import titleIcon from "../../assets/images/title-icon.png";
 import videoIcon from "../../assets/images/video.png";

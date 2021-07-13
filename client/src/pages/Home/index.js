@@ -7,7 +7,7 @@ import ChatBox from "../../components/ChatBox";
 import Default from "../../components/Default";
 import SideBar from "../../components/SideBar";
 import NotFound from "../NotFound";
-import "./style.css";
+import "./style.scss";
 import { login } from "../../redux/user/userActions";
 
 export const AuthContext = React.createContext();

@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { REQUEST_URL } from "../../constants/global";
-import "./style.css";
+import "./style.scss";
 
 const Login = () => {
   const [person, setPerson] = useState({

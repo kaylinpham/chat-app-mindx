@@ -3,7 +3,7 @@ import React from "react";
 import Content from "../Content";
 import Title from "../Title";
 
-import "./style.css";
+import "./style.scss";
 
 const ChatBox = () => {
   return (

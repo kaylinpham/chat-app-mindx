@@ -1,0 +1,33 @@
+.sidebar-avt {
+  height: 100%;
+}
+.friend {
+  &-item {
+    height: 50px;
+    border-radius: 4px;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    cursor: pointer;
+    margin-bottom: 1px;
+    color: #72767d;
+
+    &-selected {
+      background-color: rgba(79, 84, 92, 0.32);
+      color: white;
+    }
+
+    &:hover {
+      background-color: rgba(79, 84, 92, 0.4);
+    }
+  }
+
+  &-avt__wrapper {
+    width: 36px;
+    margin-right: 8px;
+  }
+
+  &-username > p {
+    line-height: 34px;
+  }
+}

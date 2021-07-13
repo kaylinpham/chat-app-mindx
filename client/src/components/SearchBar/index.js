@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import homeIcon from "../../assets/images/home1.png";
-import "./style.css";
+import "./style.scss";
 
 const SearchBar = ({ handleSearching }) => {
   return (

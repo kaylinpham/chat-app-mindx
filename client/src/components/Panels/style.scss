@@ -1,0 +1,59 @@
+.panels {
+  height: 52px;
+  background-color: #292b2f;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  display: flex;
+  overflow: hidden;
+
+  &-username {
+    color: white;
+    flex-grow: 1;
+    text-align: start;
+  }
+
+  & > p {
+    &:first-child {
+      margin-top: 1px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    &:last-child {
+      margin-top: 2px;
+      font-size: 0.8rem;
+    }
+  }
+
+  &__img {
+    width: 36px;
+    margin-right: 8px;
+  }
+}
+.avatar {
+  border-radius: 50%;
+}
+.sidebar-avt {
+  width: 36px;
+}
+#logout__icon {
+  height: 100%;
+  width: 100%;
+}
+#home__icon {
+  height: 80%;
+}
+.logout {
+  cursor: pointer;
+  width: 36px;
+  border-radius: 50%;
+  background-color: rgb(107, 105, 105);
+
+  &:hover {
+    background-color: #b9bbbe;
+  }
+}
+
+.app-font {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}

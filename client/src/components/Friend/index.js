@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./style.css";
+import "./style.scss";
 import defaultAvt from "../../assets/images/defaultAvatar.jpeg";
 import { IMAGE_URL } from "../../constants/global";
 import { NavLink } from "react-router-dom";

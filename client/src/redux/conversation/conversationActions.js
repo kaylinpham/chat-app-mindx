@@ -61,7 +61,6 @@ import { createConversation, getConversationByUserId } from "../../utils/api";
 export const addConversation = (token, userName) => {
   return async function addConversationThunk(dispatch, getState) {
     const res = await createConversation(token, userName);
-    console.log(res);
     if (!res) {
       dispatch(addConversationFailed());
     } else {

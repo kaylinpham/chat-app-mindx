@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.10",
     "multer": "^1.4.2",
+    "pacman": "^0.15.0",
     "socket.io": "^4.1.2"
   },
   "devDependencies": {

@@ -10,18 +10,18 @@
     color: white;
     flex-grow: 1;
     text-align: start;
-  }
 
-  & > p {
-    &:first-child {
-      margin-top: 1px;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
+    & > p {
+      &:first-child {
+        margin-top: 1px;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
 
-    &:last-child {
-      margin-top: 2px;
-      font-size: 0.8rem;
+      &:last-child {
+        margin-top: 2px;
+        font-size: 0.8rem;
+      }
     }
   }
 

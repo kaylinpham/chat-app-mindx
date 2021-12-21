@@ -10,13 +10,39 @@
     box-sizing: border-box;
     border-radius: 0.4rem;
   }
+
+  & .reaction-icon {
+    width: 1.5rem;
+    position: relative;
+    top: 0.3rem;
+  }
+
+  & .reaction-icon__container {
+    // position: absolute;
+    display: inline;
+  }
 }
 .right {
   float: right;
+}
+
+.right-message {
   color: white;
   background: #202225;
 }
+
 .left {
   float: left;
+}
+
+.left-message {
   background: #72767d;
+}
+
+.right-relative {
+  right: 0.25rem;
+}
+
+.left-relative {
+  left: 0.25rem;
 }

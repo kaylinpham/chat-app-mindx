@@ -27,7 +27,11 @@ mongoose
   });
 
 // Assets
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -52,13 +56,22 @@ server.listen(PORT, (_) => console.log(`Server running on port ${PORT}`));
 // socketio
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
   },
 });
 
 const chatSocket = require("./socket.io/chatSocket");
+const conversationSocket = require("./socket.io/conversationSocket");
+const onlineUsers = [];
 
 io.on("connection", (socket) => {
+  socket.on("new_user", (user) => {
+    onlineUsers.push({ socketId: socket.id, ...user });
+  });
+
+  // conversation
+  conversationSocket(socket, onlineUsers, io);
+
   // chat
   chatSocket(socket);
 

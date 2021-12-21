@@ -1,5 +1,6 @@
 import { REQUEST_URL } from "../constants/global";
 import axios from "axios";
+import { socket } from "./socket";
 
 export function getUserById(id) {
   return axios.get(`${REQUEST_URL}/user/${id}`).then((res) => {
@@ -51,6 +52,7 @@ export function createConversation(token, userName) {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "http://localhost:3000",
     },
   })
     .then((res) => {

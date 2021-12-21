@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -9,29 +9,34 @@ import SideBar from "../../components/SideBar";
 import NotFound from "../NotFound";
 import "./style.scss";
 import { login } from "../../redux/user/userActions";
+import { SocketContext } from "../../utils/socket";
 
 export const AuthContext = React.createContext();
 
 const Home = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
   const dispatch = useDispatch();
 
   let { path, url } = useRouteMatch();
   let history = useHistory();
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
     if (!user) {
-      history.push("/error");
+      history.push("/log-in");
     } else {
       dispatch(login(user));
     }
   }, [history]);
 
   useEffect(() => {
-    dispatch(fetchConversations);
+    if (user) {
+      dispatch(fetchConversations);
+      socket.emit("new_user", user);
+    }
   }, []);
-
-  console.log("home");
 
   return (
     <AuthContext.Provider value={{ url }}>

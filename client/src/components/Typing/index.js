@@ -32,7 +32,6 @@ const Typing = ({ sendMessage }) => {
         onKeyUp={handleSending}
       />
       <img
-        alt=""
         id="emojis-icon"
         src={emojisIcon}
         alt="icons"

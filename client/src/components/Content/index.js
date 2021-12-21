@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { io } from "socket.io-client";
 
 import Conversation from "../Conversation";
 import Typing from "../Typing";
 import "./style.scss";
 
 import { getAllMessage } from "../../utils/api";
-import { CONNECTION_PORT } from "../../constants/global";
-
-let socket;
+import { SocketContext } from "../../utils/socket";
 
 const Content = () => {
   const [messages, setMessages] = useState([]);
@@ -17,11 +14,13 @@ const Content = () => {
   let history = useHistory();
 
   const user = JSON.parse(localStorage.getItem("user"));
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
-    socket = io(CONNECTION_PORT);
-    console.log("2");
-  }, []);
+    socket.on("receiver_message", (data) => {
+      setMessages([...messages, data]);
+    });
+  }, [messages]);
 
   useEffect(() => {
     socket.emit("join_room", conversationId);
@@ -33,12 +32,6 @@ const Content = () => {
       history.push("/error");
     }
   }, [conversationId]);
-
-  useEffect(() => {
-    socket.on("receiver_message", (data) => {
-      setMessages([...messages, data]);
-    });
-  }, [messages]);
 
   const sendMessage = (message) => {
     let newMessage = {

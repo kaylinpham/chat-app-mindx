@@ -1,15 +1,32 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./style.scss";
 import defaultImg from "../../assets/images/default.png";
-import { addConversation } from "../../redux/conversation/conversationActions";
+
+import { useContext } from "react";
+import { SocketContext } from "../../utils/socket";
+import {
+  addConversation,
+  receiveConversation,
+} from "../../redux/conversation/conversationActions";
 
 const Default = () => {
   const inputContainer = useRef(null);
   const isFound = useSelector((state) => state.conversation.isFound);
-  const { token } = useSelector((state) => state.user.user.token);
   const dispatch = useDispatch();
+
+  const token = JSON.parse(localStorage.getItem("user"))?.token;
+  const socket = useContext(SocketContext);
+
+  useEffect(() => {
+    socket.on("request_create", (data) => {
+      const receiveConversationThunk = receiveConversation({
+        conversation: data,
+      });
+      dispatch(receiveConversationThunk);
+    });
+  }, []);
 
   const handleFinding = (e) => {
     if (e.keyCode === 13) {
